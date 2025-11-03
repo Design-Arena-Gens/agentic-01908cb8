@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tomato Clues ? ADHD-Friendly Pulse Timer</title>
+  <meta name="description" content="ADHD-friendly abductive pulse tomato timer. Focus pulses, micro-breaks, hyperfocus guard, rewards." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body class="theme-dark">
+  <noscript>This app requires JavaScript enabled.</noscript>
+  <header class="app-header" aria-label="App Header">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">??</div>
+      <h1>Tomato Clues</h1>
+    </div>
+    <div class="header-actions">
+      <button id="darkModeToggle" class="btn ghost" aria-pressed="true" aria-label="Toggle dark mode">Dark</button>
+      <button id="soundToggle" class="btn ghost" aria-pressed="true" aria-label="Toggle sounds">??</button>
+    </div>
+  </header>
+
+  <main class="grid-3" aria-label="Main">
+    <!-- Column 1: Plan & Clues -->
+    <section class="panel" aria-labelledby="plan-title">
+      <h2 id="plan-title">Plan & Clues</h2>
+      <div class="intent">
+        <label for="intentText">Why now?</label>
+        <textarea id="intentText" placeholder="Capture your intention in one sentence..."></textarea>
+      </div>
+
+      <div class="quick-add">
+        <input id="taskInput" type="text" placeholder="Quick add task (e.g., Draft blog outline)" />
+        <div class="chips">
+          <button class="chip" data-tag="writing">writing</button>
+          <button class="chip" data-tag="coding">coding</button>
+          <button class="chip" data-tag="study">study</button>
+          <button class="chip" data-tag="admin">admin</button>
+          <button class="chip" data-tag="chores">chores</button>
+        </div>
+        <div class="sliders">
+          <label>Energy <input id="energy" type="range" min="1" max="5" value="3" /></label>
+          <label>Distraction risk <input id="distraction" type="range" min="1" max="5" value="3" /></label>
+        </div>
+        <button id="addTaskBtn" class="btn primary">Add Task</button>
+      </div>
+
+      <div class="suggestion" id="suggestionBox" aria-live="polite">
+        <div class="suggestion-title">Suggested next pulse</div>
+        <div class="suggestion-body" id="suggestionText">Add a task to get a tailored plan.</div>
+        <div class="suggestion-actions">
+          <button id="acceptSuggestion" class="btn success">Accept</button>
+          <button id="refreshSuggestion" class="btn ghost">Refresh</button>
+        </div>
+      </div>
+
+      <ul id="taskList" class="task-list" aria-label="Tasks"></ul>
+    </section>
+
+    <!-- Column 2: Pulse Timer -->
+    <section class="panel timer-panel" aria-labelledby="timer-title">
+      <h2 id="timer-title">Pulse Timer</h2>
+
+      <div class="timer-visual" aria-live="polite">
+        <svg viewBox="0 0 200 200" class="dial" aria-hidden="true">
+          <circle cx="100" cy="100" r="90" class="track" />
+          <circle cx="100" cy="100" r="90" class="progress" id="progressRing" />
+        </svg>
+        <div class="time-readout">
+          <div id="phaseLabel" class="phase">Idle</div>
+          <div id="timeLabel" class="time">00:00</div>
+          <div id="pulseCount" class="sub">0 pulses</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="startPauseBtn" class="btn primary">Start</button>
+        <button id="skipBtn" class="btn ghost">Skip</button>
+        <button id="minusBtn" class="btn ghost">?30s</button>
+        <button id="plusBtn" class="btn ghost">+30s</button>
+      </div>
+
+      <div class="shortcuts">
+        <div><kbd>Space</kbd> start/pause ? <kbd>N</kbd> next ? <kbd>+/?</kbd> adjust ? <kbd>D</kbd> dark</div>
+      </div>
+    </section>
+
+    <!-- Column 3: Review & Rewards -->
+    <section class="panel" aria-labelledby="review-title">
+      <h2 id="review-title">Review & Rewards</h2>
+      <div class="stats">
+        <div class="stat"><span id="points">0</span><label>Points</label></div>
+        <div class="stat"><span id="streak">0</span><label>Day Streak</label></div>
+        <div class="stat"><span id="completed">0</span><label>Pulses</label></div>
+      </div>
+      <div class="reward" id="rewardCard" hidden>
+        <div class="reward-title">Nice pulse!</div>
+        <div class="reward-body" id="rewardText">+10 points ? Keep going ??</div>
+      </div>
+      <div class="log">
+        <h3>Recent</h3>
+        <ul id="eventLog" class="event-log"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>Tomato Clues ? Abductive Pulse System</span>
+  </footer>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
